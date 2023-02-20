@@ -1,0 +1,47 @@
+<table *ngIf="employees | async as list" mat-table [dataSource]="list" class="mat-elevation-z8">
+    <!-- Item Column -->
+    <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let employee;let i = index;">
+            <mat-checkbox [ngModel]="selected.indexOf(employee) >= 0"
+                          (ngModelChange)="update($event, employee)"
+                          [value]="employee"></mat-checkbox>
+        </td>
+        <td mat-footer-cell *matFooterCellDef>
+            <button mat-flat-button
+                    [disabled]="selected && selected.length! < 1"
+                    (click)="edit(selected)"
+                    [color]="'primary'">
+                Edit
+            </button>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.name}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.email}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="totalTime">
+        <th mat-header-cell *matHeaderCellDef>Total time</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.getTotalTime()  | msToHrs | number : '0.1-1'}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="paidRegularTime">
+        <th mat-header-cell *matHeaderCellDef>Paid regular</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.getPaidRegular() | currency}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="paidOvertime">
+        <th mat-header-cell *matHeaderCellDef>Paid overtime</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.getPaidOvertime() | currency}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true;"></tr>
+</table>

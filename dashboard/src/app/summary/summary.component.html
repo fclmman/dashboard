@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Employee count</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>{{count | async}}</div>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Total time</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>Total time: {{time | async | msToHrs | number: '0.1-3'}}</div>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Regular hours paid</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>{{regular | async | currency}}</div>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Overtime hours paid</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>{{overtime | async | currency}}</div>
+    </mat-card-content>
+</mat-card>
